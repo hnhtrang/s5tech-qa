@@ -29,14 +29,12 @@ jobs:
     - name: Install dependencies
       if: steps.cache-browsers.outputs.cache-hit != 'true'
       run: npm ci
-    - name: Install system dependencies for WebKit
+    - name: Install Playwright Browsers
       if: steps.cache-browsers.outputs.cache-hit != 'true'
       run: |
         sudo apt-get update
-        sudo apt-get install -y libwoff2-dev libharfbuzz-dev libwebp-dev libjpeg-dev
-    - name: Install Playwright Browsers
-      if: steps.cache-browsers.outputs.cache-hit != 'true'
-      run: npx playwright install --with-deps
+        npx playwright install-deps webkit
+        npx playwright install --with-deps
 
   test:
     needs: setup
