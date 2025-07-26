@@ -1,0 +1,503 @@
+TEST CASES SUMMARY,,,,,,,
+,,,,,,,
+TOTAL TEST CASES: 40,,,,,,,
+,,,,,,,
+SUMMARY BY FUNCTIONALITY,Count,Functional,Negative,Edge Case,Performance,Total,
+Login,11,4,3,4,0,11,
+Global Search,7,4,0,3,0,7,
+Search for Admin,5,5,0,0,0,5,
+Search for PIM,12,7,3,2,0,12,
+Search for Directory,5,4,1,0,0,5,
+,,,,,,,
+SUMMARY BY CATEGORY,Count,Percentage,,,,,
+Functional,24,60%,,,,,
+Negative,7,18%,,,,,
+Edge Case,9,22%,,,,,
+,,,,,,,
+SUMMARY BY PRIORITY,Count,Percentage,,,,,
+High,13,33%,,,,,
+Medium,25,62%,,,,,
+Low,2,5%,,,,,
+,,,,,,,
+SUMMARY BY AUTOMATION,Count,Percentage,,,,,
+Easy,40,100%,,,,,
+Medium,0,0%,,,,,
+Complex,0,0%,,,,,
+,,,,,,,
+#ERROR!,,,,,,,
+TEST CASES DETAILS,,,,,,,
+#ERROR!,,,,,,,
+,,,,,,,
+Test ID,Functionality,Category,Test Case Name,Test Steps,Expected Result,Priority,Automation
+L001,Login,Functional,Validate successful login with valid credentials,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established",High,Easy
+L002,Login,Functional,Validate case sensitivity handling in login,"1. Navigate to login page
+2. Enter 'ADMIN' in username field
+3. Enter 'ADMIN123' in password field
+4. Click Login","1. Login page loads with username/password fields visible
+2. Uppercase username entered successfully in username field
+3. Uppercase password entered successfully in password field
+4. System accepts/rejects based on case sensitivity rules",High,Easy
+L003,Login,Functional,Validate forgot password functionality,"1. Navigate to login page
+2. Click ""Forgot your password?""
+3. Enter 'Admin' in username field
+4. Enter 'admin123' in password field
+5. Click Login","1. Login page loads with forgot password link visible
+2. Forgot password page/modal opens successfully
+3. Username entered successfully in username field
+4. Password entered successfully in password field
+5. User redirected to dashboard",Low,Easy
+L004,Login,Functional,Validate session persistence after navigation,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to different page
+6. Refresh browser","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard
+5. Navigation to other pages works without re-authentication
+6. Page refreshes without requiring re-login",High,Easy
+L005,Login,Negative,Validate error handling with empty credentials,"1. Navigate to login page
+2. Leave username and password fields empty
+3. Click Login","1. Login page loads with username/password fields visible
+2. Empty fields remain unfilled
+3. Error message appears: 'Username/Password required' and login blocked",High,Easy
+L006,Login,Negative,Validate error handling with invalid username,"1. Navigate to login page
+2. Enter 'invalid' in username field
+3. Enter 'admin123' in password field
+4. Click Login","1. Login page loads with username/password fields visible
+2. Invalid username entered successfully in username field
+3. Valid password entered successfully in password field
+4. Error message: 'Invalid credentials' displayed and login blocked",High,Easy
+L007,Login,Negative,Validate error handling with invalid password,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'wrong' in password field
+4. Click Login","1. Login page loads with username/password fields visible
+2. Valid username entered successfully in username field
+3. Invalid password entered successfully in password field
+4. Error message: 'Invalid credentials' displayed and login blocked",High,Easy
+L008,Login,Edge Case,Validate SQL injection protection in login,"1. Navigate to login page
+2. Enter ''' OR 1=1--' in username field
+3. Enter 'admin123' in password field
+4. Click Login","1. Login page loads with username/password fields visible
+2. SQL injection string entered successfully in username field
+3. Valid password entered successfully in password field
+4. Input sanitized, no SQL execution, authentication fails safely",High,Easy
+L009,Login,Edge Case,Validate XSS protection in login,"1. Navigate to login page
+2. Enter '<script>alert(''xss'')</script>' in username field
+3. Enter 'admin123' in password field
+4. Click Login","1. Login page loads with username/password fields visible
+2. XSS script entered successfully in username field
+3. Valid password entered successfully in password field
+4. Script not executed, input sanitized, no alert popup",High,Easy
+L010,Login,Edge Case,Validate system handling of extremely long username,"1. Navigate to login page
+2. Enter 1000+ character string in username field
+3. Enter 'admin123' in password field
+4. Click Login","1. Login page loads with username/password fields visible
+2. Long string entered and the username field is truncated or handled appropriately
+3. Valid password entered successfully in password field
+4. System handles successfully with invalid credentials",Low,Medium
+L011,Login,Edge Case,Validate special characters in username field,"1. Navigate to login page
+2. Enter '!@#$%^&*()' in username field
+3. Enter 'admin123' in password field
+4. Click Login","1. Login page loads with username/password fields visible
+2. Special characters entered successfully in username field
+3. Valid password entered successfully in password field
+4. System processes special characters properly without errors",Low,Easy
+G001,Global Search,Functional,Validate user able to search by navigation filter for Global Search,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Type ""admin"" in sidebar search box
+6. Observe menu changes","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. Search text entered successfully in search box
+6. Menu filters to show only Admin module, other modules hidden",Medium,Easy
+G002,Global Search,Functional,Validate user able to search by no matches for Global Search,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Type ""xyz123"" in sidebar search
+6. Observe menu changes","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. Search text entered successfully
+6. No menu items displayed, empty menu or 'no results' message",Medium,Easy
+G003,Global Search,Functional,Validate user able to search by clear functionality for Global Search,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Type text in search box
+6. Clear search field (X button or delete)","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. Text entered successfully in search
+6. Search cleared, all menu items restored to original state",Medium,Easy
+G004,Global Search,Functional,Validate user able to search by case insensitive for Global Search,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Type ""ADMIN"" in sidebar search
+6. Observe menu","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. Uppercase text entered successfully
+6. Admin module shown (case insensitive search working)",Low,Easy
+G005,Global Search,Edge Case,Validate user able to search by very long input for Global Search,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Enter 1000+ characters in search field
+6. Submit search","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. Long string entered (may be truncated)
+6. System handles gracefully without errors or crashes",Medium,Easy
+G006,Global Search,Edge Case,Validate user able to search by unicode characters for Global Search,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Enter ""测试用户"" in search field
+6. Submit search","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. Unicode characters entered successfully
+6. Search executes, unicode support confirmed or graceful handling",Low,Easy
+G007,Global Search,Edge Case,Validate user able to search by empty submission for Global Search,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Leave all search fields empty
+6. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. Empty fields remain unfilled
+6. Default behavior: shows all records or displays 'enter criteria' message",Medium,Easy
+A001,Search for Admin,Functional,Validate user able to search by username for Admin,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to Admin > System Users
+6. Enter ""admin"" in Username field
+7. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. System Users page loads with search form
+6. Username entered successfully in search field
+7. Search executes, users with 'admin' in username displayed",Medium,Easy
+A002,Search for Admin,Functional,Validate user able to search by role for Admin,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to Admin > System Users
+6. Select ""Admin"" from User Role dropdown
+7. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. System Users page loads with role dropdown
+6. Admin role selected successfully
+7. Search executes, only Admin role users shown",Medium,Easy
+A003,Search for Admin,Functional,Validate user able to search by employee name for Admin,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to Admin > System Users
+6. Enter ""Peter Anderson"" in Employee Name
+7. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. System Users page loads with employee name field
+6. Employee name entered successfully
+7. Search executes, system users associated with Peter Anderson shown",Medium,Easy
+A004,Search for Admin,Functional,Validate user able to search by status for Admin,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to Admin > System Users
+6. Select ""Enabled"" or ""Disabled"" from Status dropdown
+7. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. System Users page loads with status dropdown
+6. Status selected successfully
+7. Search executes, users filtered by selected status",Medium,Easy
+A005,Search for Admin,Functional,Validate user able to search by combined filters for Admin,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to Admin > System Users
+6. Set Username + Role + Status filters
+7. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. System Users page loads with all filter options
+6. All filters set successfully
+7. Search executes, results match all criteria",Medium,Easy
+P001,Search for PIM,Functional,Validate user able to search by name for PIM,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to PIM module
+6. Navigate to Employee Information
+7. Enter ""John Smith"" in Employee Name field
+8. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. PIM page loads successfully
+6. Employee Information page loads with search form visible
+7. Name entered successfully in Employee Name field
+8. Search executes, filtered list shows employees with 'John Smith' in name",High,Easy
+P002,Search for PIM,Functional,Validate user able to search by ID for PIM,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to PIM module
+6. Navigate to Employee Information
+7. Enter ""001"" in Employee ID field
+8. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. PIM page loads successfully
+6. Employee Information page loads with search form
+7. ID entered successfully in Employee ID field
+8. Search executes, specific employee with ID 001 displayed",High,Easy
+P003,Search for PIM,Functional,Validate user able to search by employment status for PIM,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to PIM module
+6. Navigate to Employee Information
+7. Select ""Full-Time Permanent"" from Employment Status dropdown
+8. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. PIM page loads successfully
+6. Employee Information page loads with dropdown visible
+7. 'Full-Time Permanent' status selected successfully from dropdown
+8. Search executes, only Full-Time Permanent employees shown in results",High,Easy
+P004,Search for PIM,Functional,Validate user able to search by job title for PIM,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to PIM module
+6. Navigate to Employee Information
+7. Select ""Software Engineer"" from Job Title dropdown
+8. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. PIM page loads successfully
+6. Employee Information page loads with job title dropdown
+7. Software Engineer job title selected successfully
+8. Search executes, employees with Software Engineer job title displayed",High,Easy
+P005,Search for PIM,Functional,Validate user able to search by sub unit for PIM,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to PIM module
+6. Navigate to Employee Information
+7. Select ""Human Resources"" from Sub Unit dropdown
+8. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. PIM page loads successfully
+6. Employee Information page loads with sub unit dropdown
+7. Human Resources unit selected successfully
+8. Search executes, employees in Human Resources unit displayed",Medium,Easy
+P006,Search for PIM,Functional,Validate user able to search by combined filters for PIM,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to PIM module
+6. Navigate to Employee Information
+7. Enter ""John"" in Employee Name + Select ""Full-Time Permanent"" Status + Select ""Software Engineer"" Job Title
+8. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. PIM page loads successfully
+6. Employee Information page loads with all filter options
+7. All filters set successfully with realistic values
+8. Search executes, results match all criteria simultaneously",High,Easy
+P007,Search for PIM,Functional,Validate user able to search by filter reset for PIM,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to PIM module
+6. Navigate to Employee Information
+7. Apply filters: Enter ""John"" in Name + Select ""Human Resources"" Sub Unit
+8. Click Reset button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. PIM page loads successfully
+6. Employee Information page loads with filter options
+7. Realistic filters applied successfully
+8. All filters cleared, form reset to default state, full employee list shown",High,Easy
+P010,Search for PIM,Negative,Validate user able to search by invalid employee name for PIM,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to PIM module
+6. Navigate to Employee Information
+7. Enter ""InvalidEmployeeName123"" in Employee Name field
+8. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. PIM page loads successfully
+6. Employee Information page loads with search form visible
+7. Invalid name entered successfully in Employee Name field
+8. Search executes, no results found message displayed",Medium,Easy
+P011,Search for PIM,Negative,Validate user able to search by non-existent employee ID for PIM,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to PIM module
+6. Navigate to Employee Information
+7. Enter ""9999"" in Employee ID field
+8. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. PIM page loads successfully
+6. Employee Information page loads with search form
+7. Non-existent ID entered successfully in Employee ID field
+8. Search executes, no matching employee found message displayed",Medium,Easy
+P013,Search for PIM,Negative,Validate user able to search by empty search criteria for PIM,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to PIM module
+6. Navigate to Employee Information
+7. Leave all search fields empty
+8. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. PIM page loads successfully
+6. Employee Information page loads with empty search form
+7. All fields remain empty
+8. System displays all employees or prompts for search criteria",Medium,Easy
+P015,Search for PIM,Edge Case,Validate user able to search by very long employee name for PIM,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to PIM module
+6. Navigate to Employee Information
+7. Enter 500+ character string in Employee Name field
+8. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. PIM page loads successfully
+6. Employee Information page loads with search form
+7. Very long string entered (may be truncated)
+8. System handles gracefully without errors or crashes",Low,Easy
+P016,Search for PIM,Edge Case,Validate user able to search by special characters for PIM,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to PIM module
+6. Navigate to Employee Information
+7. Enter ""!@#$%^&*()_+"" in Employee Name field
+8. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. PIM page loads successfully
+6. Employee Information page loads with search form
+7. Special characters entered successfully
+8. System processes special characters properly without errors",Low,Easy
+D001,Search for Directory,Functional,Validate user able to search by name for Directory,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to Directory module
+6. Enter ""Mariah Carey"" in Employee Name field
+7. System suggests all employees with name include ""Carey""
+8. Select one of the suggested employees
+9. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. Directory page loads with search form
+6. ""Mariah Carey"" entered successfully in Employee Name field
+7. System displays autocomplete suggestions with employees containing ""Carey""
+8. User selects one employee from suggestions successfully
+9. Search executes, card-based results with selected employee displayed",Medium,Easy
+D002,Search for Directory,Functional,Validate user able to search by job title for Directory,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to Directory module
+6. Select job title from dropdown
+7. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. Directory page loads with job title dropdown
+6. Job title selected successfully
+7. Search executes, results filtered by selected job title",Medium,Easy
+D003,Search for Directory,Functional,Validate user able to search by location for Directory,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to Directory module
+6. Select location from dropdown
+7. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. Directory page loads with location dropdown
+6. Location selected successfully
+7. Search executes, results filtered by selected location",Medium,Easy
+D004,Search for Directory,Functional,Validate user able to search by photo display for Directory,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to Directory
+6. Perform any search
+7. Check result cards","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. Directory page loads successfully
+6. Search executes and returns results
+7. Employee cards display with profile photos loading correctly",Low,Easy
+D005,Search for Directory,Negative,Validate user able to search by invalid name for Directory,"1. Navigate to login page
+2. Enter 'Admin' in username field
+3. Enter 'admin123' in password field
+4. Click Login
+5. Navigate to Directory module
+6. Enter ""Trang"" in Employee Name field
+7. Click Search button","1. Login page loads with username/password fields visible
+2. Username entered successfully in username field
+3. Password entered successfully in password field
+4. User redirected to dashboard, session established
+5. Directory page loads with search form
+6. ""Trang"" entered successfully in Employee Name field
+7. System shows ""Invalid"" highlight in red under search field and displays all employees",Medium,Easy
