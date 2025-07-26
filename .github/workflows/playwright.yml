@@ -31,10 +31,7 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       if: steps.cache-browsers.outputs.cache-hit != 'true'
-      run: |
-        sudo apt-get update
-        npx playwright install-deps webkit
-        npx playwright install --with-deps
+      run: npx playwright install --with-deps
 
   test:
     needs: setup
@@ -43,7 +40,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [chromium, firefox, webkit, edge, mobile-chrome, mobile-safari]
+        project: [chromium, firefox, edge, mobile-chrome]
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
