@@ -4,6 +4,8 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-blue)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-16+-green)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Playwright Tests](https://github.com/hnhtrang/s5tech-qa-automation-challenge/actions/workflows/playwright.yml/badge.svg)](https://github.com/hnhtrang/s5tech-qa-automation-challenge/actions/workflows/playwright.yml)
+
 
 A comprehensive Playwright-based test automation framework for testing OrangeHRM demo application. Features cross-browser testing, API testing, and load testing capabilities with Page Object Model architecture.
 
