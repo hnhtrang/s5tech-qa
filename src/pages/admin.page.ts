@@ -98,7 +98,10 @@ export class AdminPage extends BasePage {
     if (rows.length === 0) return false;
     
     for (const row of rows) {
-      const usernameCell = await row.locator('.oxd-table-cell').nth(1).textContent();
+      let usernameCell = await row.locator('.oxd-table-cell').nth(1).textContent();
+      if (usernameCell === '') {
+        usernameCell = await row.locator('.oxd-table-cell').nth(2).textContent();
+      }
       if (usernameCell?.toLowerCase().includes(username.toLowerCase())) {
         return true;
       }
