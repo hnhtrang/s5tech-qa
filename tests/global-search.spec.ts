@@ -15,11 +15,8 @@ test.describe('Global Search Module Tests', () => {
       const visibleItems = await dashboardPage.getVisibleMenuItems();
       expect(visibleItems.length).toBeGreaterThan(0);
       
-      // At least one menu item should contain 'admin'
-      const hasAdminItem = visibleItems.some(item => 
-        item.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      expect(hasAdminItem).toBe(true);
+      const allItemsMatch = await dashboardPage.verifyAllVisibleItemsContain(searchTerm);
+      expect(allItemsMatch).toBe(true);
     });
 
     test('G002 - No matches handling', async ({ dashboardPage }) => {
@@ -31,17 +28,15 @@ test.describe('Global Search Module Tests', () => {
     });
 
     test('G003 - Search clear functionality', async ({ dashboardPage }) => {
-      // First search for something
+      // Search for something specific
       await dashboardPage.searchMenu('admin');
-      let visibleItems = await dashboardPage.getVisibleMenuItems();
-      const filteredCount = visibleItems.length;
+      const filteredItems = await dashboardPage.getVisibleMenuItems();
+      expect(filteredItems.length).toBeGreaterThan(0);
 
-      // Clear search
+      // Clear search - should show more items than filtered results
       await dashboardPage.clearSearch();
-      
-      // All menu items should be visible again
-      visibleItems = await dashboardPage.getVisibleMenuItems();
-      expect(visibleItems.length).toBeGreaterThan(filteredCount);
+      const restoredItems = await dashboardPage.getVisibleMenuItems();
+      expect(restoredItems.length).toBeGreaterThan(filteredItems.length);
     });
 
     test('G004 - Case insensitive search', async ({ dashboardPage }) => {
@@ -54,9 +49,10 @@ test.describe('Global Search Module Tests', () => {
       await dashboardPage.searchMenu('ADMIN');
       const uppercaseResults = await dashboardPage.getVisibleMenuItems();
 
-      // Results should be the same regardless of case
+      // Results should be identical regardless of case
       expect(lowercaseResults.length).toBe(uppercaseResults.length);
       expect(lowercaseResults.length).toBeGreaterThan(0);
+      expect(lowercaseResults).toEqual(uppercaseResults);
     });
   });
 

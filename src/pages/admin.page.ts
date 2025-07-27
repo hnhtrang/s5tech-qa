@@ -92,4 +92,43 @@ export class AdminPage extends BasePage {
   async hasNoRecords(): Promise<boolean> {
     return await this.isVisible(this.noRecordsMessage);
   }
+
+  async verifyResultsContainUsername(username: string): Promise<boolean> {
+    const rows = await this.resultsTable.locator('.oxd-table-card').all();
+    if (rows.length === 0) return false;
+    
+    for (const row of rows) {
+      const usernameCell = await row.locator('.oxd-table-cell').nth(1).textContent();
+      if (usernameCell?.toLowerCase().includes(username.toLowerCase())) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  async verifyResultsMatchRole(role: string): Promise<boolean> {
+    const rows = await this.resultsTable.locator('.oxd-table-card').all();
+    if (rows.length === 0) return false;
+    
+    for (const row of rows) {
+      const roleCell = await row.locator('.oxd-table-cell').nth(2).textContent();
+      if (roleCell && !roleCell.includes(role)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  async verifyResultsMatchStatus(status: string): Promise<boolean> {
+    const rows = await this.resultsTable.locator('.oxd-table-card').all();
+    if (rows.length === 0) return false;
+    
+    for (const row of rows) {
+      const statusCell = await row.locator('.oxd-table-cell').nth(4).textContent();
+      if (statusCell && !statusCell.includes(status)) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

@@ -10,20 +10,21 @@ test.describe('Admin Search Module Tests', () => {
 
   test.describe('System Users Search Tests', () => {
     test('A001 - Username search functionality', async ({ adminPage }) => {
-      await adminPage.searchByUsername(TEST_DATA.validCredentials.username);
+      const searchUsername = TEST_DATA.validCredentials.username;
+      await adminPage.searchByUsername(searchUsername);
 
       await adminPage.page.waitForTimeout(1000);
       
       const resultCount = await adminPage.getSearchResults();
       expect(resultCount).toBeGreaterThan(0);
       
-      // Verify we're not showing "No Records Found"
-      const hasNoRecords = await adminPage.hasNoRecords();
-      expect(hasNoRecords).toBe(false);
+      const containsUsername = await adminPage.verifyResultsContainUsername(searchUsername);
+      expect(containsUsername).toBe(true);  
     });
 
     test('A002 - User role search functionality', async ({ adminPage }) => {
-      await adminPage.selectUserRole(TEST_DATA.filterOptions.userRoles[0]); // 'Admin'
+      const searchRole = TEST_DATA.filterOptions.userRoles[0];
+      await adminPage.selectUserRole(searchRole);
       await adminPage.performSearch();
       
       await adminPage.page.waitForTimeout(1000);
@@ -31,26 +32,23 @@ test.describe('Admin Search Module Tests', () => {
       const resultCount = await adminPage.getSearchResults();
       expect(resultCount).toBeGreaterThan(0);
       
-      // Verify we're not showing "No Records Found"
-      const hasNoRecords = await adminPage.hasNoRecords();
-      expect(hasNoRecords).toBe(false);
+      const resultsMatchRole = await adminPage.verifyResultsMatchRole(searchRole);
+      expect(resultsMatchRole).toBe(true);
     });
 
     test('A003 - Employee name search functionality', async ({ adminPage }) => {
-      await adminPage.searchByEmployeeName(TEST_DATA.searchData.validEmployeeNames[0]); // 'John'
+      await adminPage.searchByEmployeeName(TEST_DATA.searchData.validEmployeeNames[0]);
 
       await adminPage.page.waitForTimeout(1000);
       
-      // Should either have results or show no records message
       const resultCount = await adminPage.getSearchResults();
-      const hasNoRecords = await adminPage.hasNoRecords();
       
-      // Either we have results OR we have "No Records Found" message
-      expect(resultCount > 0 || hasNoRecords).toBe(true);
+      expect(resultCount).toBeGreaterThan(0);
     });
 
     test('A004 - Status search functionality', async ({ adminPage }) => {
-      await adminPage.selectStatus(TEST_DATA.filterOptions.userStatus[0]); // 'Enabled'
+      const searchStatus = TEST_DATA.filterOptions.userStatus[0];
+      await adminPage.selectStatus(searchStatus);
       await adminPage.performSearch();
       
       await adminPage.page.waitForTimeout(1000);
@@ -58,25 +56,32 @@ test.describe('Admin Search Module Tests', () => {
       const resultCount = await adminPage.getSearchResults();
       expect(resultCount).toBeGreaterThan(0);
       
-      // Verify we're not showing "No Records Found" for enabled users
-      const hasNoRecords = await adminPage.hasNoRecords();
-      expect(hasNoRecords).toBe(false);
+      const resultsMatchStatus = await adminPage.verifyResultsMatchStatus(searchStatus);
+      expect(resultsMatchStatus).toBe(true);
     });
 
     test('A005 - Combined search criteria functionality', async ({ adminPage }) => {
-      // Set all search criteria before searching using test data
-      await adminPage.fillUsername(TEST_DATA.validCredentials.username);
-      await adminPage.selectUserRole(TEST_DATA.filterOptions.userRoles[0]); // 'Admin'
-      await adminPage.selectStatus(TEST_DATA.filterOptions.userStatus[0]); // 'Enabled'
+      const searchUsername = TEST_DATA.validCredentials.username;
+      const searchRole = TEST_DATA.filterOptions.userRoles[0];
+      const searchStatus = TEST_DATA.filterOptions.userStatus[0];
+      
+      await adminPage.fillUsername(searchUsername);
+      await adminPage.selectUserRole(searchRole);
+      await adminPage.selectStatus(searchStatus);
       await adminPage.performSearch();
 
       await adminPage.page.waitForTimeout(1000);
       
       const resultCount = await adminPage.getSearchResults();
-      const hasNoRecords = await adminPage.hasNoRecords();
+      expect(resultCount).toBeGreaterThan(0);
       
-      expect(resultCount).toBe(1);
-      expect(hasNoRecords).toBe(false);
+      const containsUsername = await adminPage.verifyResultsContainUsername(searchUsername);
+      const resultsMatchRole = await adminPage.verifyResultsMatchRole(searchRole);
+      const resultsMatchStatus = await adminPage.verifyResultsMatchStatus(searchStatus);
+      
+      expect(containsUsername).toBe(true);
+      expect(resultsMatchRole).toBe(true);
+      expect(resultsMatchStatus).toBe(true);
     });
   });
 });

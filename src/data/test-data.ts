@@ -21,9 +21,9 @@ export const TEST_DATA = {
   },
 
   searchData: {
-    validEmployeeNames: ['John', 'Alice', 'Robert'],
+    validEmployeeNames: ['John', 'Alice','Admin'],
     invalidEmployeeNames: ['NonExistentUser', ''],
-    validEmployeeIds: ['001', '123'],
+    validEmployeeIds: ['0001', '123'],
     invalidEmployeeIds: ['999999', 'abc'],
     menuSearchTerms: ['admin', 'pim', 'leave', 'time'],
     invalidMenuSearch: ['zzznomatch', ''],
@@ -34,7 +34,7 @@ export const TEST_DATA = {
 
   filterOptions: {
     userRoles: ['Admin', 'ESS'],
-    employmentStatus: ['Full-Time Permanent', 'Part-Time Contract'],
+    employmentStatus: ['Full-Time Permanent', 'Part-Time Contract', 'Full-Time Contract', 'Full-Time Probation'],
     userStatus: ['Enabled', 'Disabled'],
     includeOptions: ['Current Employees Only', 'Past Employees Only']
   },

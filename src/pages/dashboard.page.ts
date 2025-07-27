@@ -43,4 +43,11 @@ export class DashboardPage extends BasePage {
   async isMenuItemVisible(menuName: string): Promise<boolean> {
     return await this.page.getByText(menuName).isVisible();
   }
+
+  async verifyAllVisibleItemsContain(searchTerm: string): Promise<boolean> {
+    const items = await this.getVisibleMenuItems();
+    return items.every(item => 
+      item.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
 }
