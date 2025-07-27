@@ -74,8 +74,8 @@ npm -v   # Requires npm 8+
 ### Installation
 ```bash
 # Clone the repository
-git clone <repository-url>
-cd assignment_99Tech_playwright
+git clone git@github.com:hnhtrang/s5tech-qa.git
+cd s5tech-qa
 
 # Install dependencies
 npm install
