@@ -15,7 +15,7 @@ A comprehensive Playwright-based test automation framework for testing OrangeHRM
 
 ## ✨ Features
 
-- 🎭 **Cross-Browser Testing**: Chrome, Firefox, Safari, Edge, Mobile Chrome/Safari
+- 🎭 **Cross-Browser Testing**: Chrome, Edge, Mobile Chrome
 - 🏗️ **Page Object Model**: Inheritance-based structure with BasePage
 - 🔧 **TypeScript**: Full type safety and enhanced developer experience
 - 🌍 **Multi-Environment**: dev/staging/prod configuration support
