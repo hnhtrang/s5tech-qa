@@ -21,9 +21,9 @@ export const TEST_DATA = {
   },
 
   searchData: {
-    validEmployeeNames: ['John', 'Alice','Admin'],
+    validEmployeeNames: ['john bhim', 'Timothy Lewis Amiano', 'Balancha Balanchayev Admin'],
     invalidEmployeeNames: ['NonExistentUser', ''],
-    validEmployeeIds: ['0001', '123'],
+    validEmployeeIds: ['45', '0039', 'balancha'],
     invalidEmployeeIds: ['999999', 'abc'],
     menuSearchTerms: ['admin', 'pim', 'leave', 'time'],
     invalidMenuSearch: ['zzznomatch', ''],
@@ -40,9 +40,9 @@ export const TEST_DATA = {
   },
 
   pimData: {
-    validEmployeeNames: ['John', 'Sara', 'Peter', 'Linda'],
+    validEmployeeNames: ['john bhim', 'Timothy Lewis Amiano', 'Thomas Kutty Benny', 'Balancha Balanchayev Admin'],
     invalidEmployeeNames: ['NonExistentEmployee', 'InvalidUser123'],
-    validEmployeeIds: ['0295', '0303', '0320'],
+    validEmployeeIds: ['45', '0039', '03694567', 'balancha'],
     invalidEmployeeIds: ['9999', 'INVALID'],
     employmentStatuses: ['Full-Time Permanent', 'Part-Time Contract', 'Full-Time Contract'],
     jobTitles: ['HR Manager', 'Software Engineer', 'QA Engineer'],
@@ -53,14 +53,14 @@ export const TEST_DATA = {
   },
 
   directoryData: {
-    validEmployeeNames: ['joker john selvam', 'Ranga Akunuri', 'Timothy Lewis Amiano'],
+    validEmployeeNames: ['Timothy Lewis Amiano', 'Thomas Kutty Benny', 'Balancha Balanchayev Admin'],
     invalidEmployeeNames: ['invalidname', 'NonExistentEmployee'],
     jobTitles: ['Chief Financial Officer', 'QA Engineer', 'HR Manager', 'Software Engineer'],
     locations: ['New York Sales Office', 'Texas R&D', 'Canadian Regional HQ', 'HQ - CA, USA'],
     autocompleteSearches: [
       { partialName: 'timothy', fullName: 'Timothy Lewis Amiano' },
-      { partialName: 'ranga', fullName: 'Ranga Akunuri' },
-      { partialName: 'asanov', fullName: 'Asanov Uson Asanovich' }
+      { partialName: 'thomas', fullName: 'Thomas Kutty Benny' },
+      { partialName: 'balancha', fullName: 'Balancha Balanchayev Admin' }
     ]
   },
 
