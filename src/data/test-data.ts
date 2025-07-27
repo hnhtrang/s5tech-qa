@@ -52,6 +52,18 @@ export const TEST_DATA = {
     specialCharEmployeeName: '@#$%^&*()'
   },
 
+  directoryData: {
+    validEmployeeNames: ['joker john selvam', 'Ranga Akunuri', 'Timothy Lewis Amiano'],
+    invalidEmployeeNames: ['invalidname', 'NonExistentEmployee'],
+    jobTitles: ['Chief Financial Officer', 'QA Engineer', 'HR Manager', 'Software Engineer'],
+    locations: ['New York Sales Office', 'Texas R&D', 'Canadian Regional HQ', 'HQ - CA, USA'],
+    autocompleteSearches: [
+      { partialName: 'timothy', fullName: 'Timothy Lewis Amiano' },
+      { partialName: 'ranga', fullName: 'Ranga Akunuri' },
+      { partialName: 'asanov', fullName: 'Asanov Uson Asanovich' }
+    ]
+  },
+
   urlPaths: {
     login: '/web/index.php/auth/login',
     dashboard: '/web/index.php/dashboard/index',
