@@ -20,7 +20,6 @@ A comprehensive Playwright-based test automation framework for testing OrangeHRM
 - 🔧 **TypeScript**: Full type safety and enhanced developer experience
 - 🌍 **Multi-Environment**: dev/staging/prod configuration support
 - 🧪 **Comprehensive Testing**: UI (40 tests), API (20 tests), Load (9 tests)
-- 📊 **Rich Reporting**: HTML, JSON, JUnit with screenshots and videos
 - ⚡ **Parallel Execution**: Fast test execution with retry mechanisms
 
 ## 📋 Test Coverage
