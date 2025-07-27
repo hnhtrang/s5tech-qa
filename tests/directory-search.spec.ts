@@ -34,7 +34,7 @@ test.describe('Directory Search Module', () => {
   });
 
   test('D002: Search by job title filter', async ({ authenticatedPage, directoryPage }) => {
-    const jobTitle = TEST_DATA.directoryData.jobTitles[1]; // Try 'QA Engineer' instead
+    const jobTitle = TEST_DATA.directoryData.jobTitles[2];
 
     await directoryPage.selectJobTitle(jobTitle);
     await directoryPage.performSearch();
