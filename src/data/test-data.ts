@@ -44,7 +44,7 @@ export const TEST_DATA = {
     invalidEmployeeNames: ['NonExistentEmployee', 'InvalidUser123'],
     validEmployeeIds: ['0001', '0039', '03694567', 'balancha'],
     invalidEmployeeIds: ['9999', 'INVALID'],
-    employmentStatuses: ['Full-Time Permanent', 'Part-Time Contract', 'Full-Time Contract'],
+    employmentStatuses: ['Full-Time Permanent', 'Part-Time Contract', 'Full-Time Contract', 'Part-Time Internship'],
     jobTitles: ['HR Manager', 'Software Engineer', 'QA Engineer'],
     subUnits: ['Human Resources', 'Engineering', 'Administration'],
     includeOptions: ['Current Employees Only', 'Current and Past Employees', 'Past Employees Only'],

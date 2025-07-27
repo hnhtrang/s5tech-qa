@@ -34,7 +34,7 @@ test.describe('PIM Search Module', () => {
     });
 
     test('P003: Filter by employment status', async ({ pimPage }) => {
-      const employmentStatus = TEST_DATA.pimData.employmentStatuses[0];
+      const employmentStatus = TEST_DATA.pimData.employmentStatuses[3];
       await pimPage.selectEmploymentStatus(employmentStatus);
       await pimPage.click(pimPage.searchButton);
       await pimPage.page.waitForTimeout(1000);
