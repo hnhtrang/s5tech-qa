@@ -18,7 +18,6 @@ A comprehensive Playwright-based test automation framework for testing OrangeHRM
 - 🎭 **Cross-Browser Testing**: Chrome, Edge, Mobile Chrome
 - 🏗️ **Page Object Model**: Inheritance-based structure with BasePage
 - 🔧 **TypeScript**: Full type safety and enhanced developer experience
-- 🌍 **Multi-Environment**: dev/staging/prod configuration support
 - 🧪 **Comprehensive Testing**: UI (40 tests), API (20 tests), Load (9 tests)
 - ⚡ **Parallel Execution**: Fast test execution with retry mechanisms
 
@@ -31,8 +30,8 @@ A comprehensive Playwright-based test automation framework for testing OrangeHRM
 | **Load Tests** | 9 | Authentication and Search performance |
 
 ### Detailed Test Cases
-- **Login Module (11 tests)**: Valid/invalid credentials, security, session management
-- **Search Modules (29 tests)**: Employee search, filters, pagination across modules
+- **Login Functionality (11 tests)**: Valid/invalid credentials, security, session management
+- **Search Functionality (29 tests)**: Employee search, filters, pagination across modules
 - **API Tests (20 tests)**: CSRF protection, security validation, performance
 - **Load Tests (9 tests)**: Concurrent users, rapid requests, mixed scenarios
 
