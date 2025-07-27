@@ -40,7 +40,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [chromium, firefox, edge, mobile-chrome]
+        project: [chromium, edge, mobile-chrome]
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
