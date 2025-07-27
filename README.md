@@ -169,6 +169,7 @@ The framework supports major CI/CD platforms with:
 - Comprehensive reporting
 - Screenshots and videos on failure
 - Detailed HTML reports for debugging
+- Support cross browsers, and cross platform (Chrome, Edge, Mobile Chrome)
 
 ## 🤝 Contributing
 
