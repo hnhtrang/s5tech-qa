@@ -114,7 +114,10 @@ export class AdminPage extends BasePage {
     if (rows.length === 0) return false;
     
     for (const row of rows) {
-      const roleCell = await row.locator('.oxd-table-cell').nth(2).textContent();
+      let roleCell = await row.locator('.oxd-table-cell').nth(2).textContent();
+      if (roleCell?.includes('Username')) {
+        roleCell = await row.locator('.oxd-table-cell').nth(3).textContent();
+      }
       if (roleCell && !roleCell.includes(role)) {
         return false;
       }
