@@ -159,6 +159,10 @@ npx playwright test tests/api/ --reporter=list
 npx playwright test tests/load-testing/ --reporter=list
 ```
 
+### Youtube demo
+
+Here is the demo video: [Youtube](https://youtu.be/0hCFtn0vy_g)
+
 ## CI/CD Integration
 
 The framework supports major CI/CD platforms with parallel execution and comprehensive reporting. Test results include screenshots, videos, and detailed HTML reports for debugging failed tests.
