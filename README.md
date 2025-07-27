@@ -1,8 +1,124 @@
 # OrangeHRM Test Automation Framework
 
-A comprehensive Playwright-based test automation framework for OrangeHRM demo application, featuring cross-browser testing, API testing, and load testing capabilities.
+[![Playwright](https://img.shields.io/badge/Playwright-1.54.1-brightgreen)](https://playwright.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-blue)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-16+-green)](https://nodejs.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## Framework Structure
+A comprehensive Playwright-based test automation framework for testing OrangeHRM demo application. Features cross-browser testing, API testing, and load testing capabilities with Page Object Model architecture.
+
+## 🎯 Demo
+
+**YouTube Demo:** [Watch the complete demo](https://youtu.be/0hCFtn0vy_g)
+
+## ✨ Features
+
+- 🎭 **Cross-Browser Testing**: Chrome, Firefox, Safari, Edge, Mobile Chrome/Safari
+- 🏗️ **Page Object Model**: Inheritance-based structure with BasePage
+- 🔧 **TypeScript**: Full type safety and enhanced developer experience
+- 🌍 **Multi-Environment**: dev/staging/prod configuration support
+- 🧪 **Comprehensive Testing**: UI (40 tests), API (20 tests), Load (9 tests)
+- 📊 **Rich Reporting**: HTML, JSON, JUnit with screenshots and videos
+- ⚡ **Parallel Execution**: Fast test execution with retry mechanisms
+
+## 📋 Test Coverage
+
+| Test Type | Count | Description |
+|-----------|-------|-------------|
+| **UI Tests** | 40 | Login, PIM/Global/Admin/Directory Search |
+| **API Tests** | 20 | Authentication and PIM Search APIs |
+| **Load Tests** | 9 | Authentication and Search performance |
+
+### Detailed Test Cases
+- **Login Module (11 tests)**: Valid/invalid credentials, security, session management
+- **Search Modules (29 tests)**: Employee search, filters, pagination across modules
+- **API Tests (20 tests)**: CSRF protection, security validation, performance
+- **Load Tests (9 tests)**: Concurrent users, rapid requests, mixed scenarios
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 16+ and npm 8+
+- Git
+
+### Installation
+
+```bash
+# Clone the repository
+git clone git@github.com:hnhtrang/s5tech-qa.git
+cd s5tech-qa
+
+# Install dependencies
+npm install
+
+# Install browsers
+npx playwright install
+```
+
+## 📖 Usage
+
+### Basic Commands
+
+```bash
+# Run all tests
+npm test
+
+# Run tests with browser visible
+npm run test:headed
+
+# Run specific module tests
+npm run test:login
+
+# Run specific test case
+npm run test:case "L001"
+
+# Debug mode
+npm run test:debug
+
+# View test report
+npm run show-report
+```
+
+### Advanced Commands
+
+```bash
+# Run all tests
+npx playwright test
+
+# Run specific test file
+npx playwright test tests/login.spec.ts
+
+# Run API tests
+npx playwright test tests/api/
+
+# Run load tests
+npx playwright test tests/load-testing/
+
+# Debug specific test
+npx playwright test tests/login.spec.ts -g "L001" --project=chromium --headed --debug
+```
+
+### Environment Configuration
+
+```bash
+# Test against different environments
+TEST_ENV=dev npm test      # Default
+TEST_ENV=staging npm test  # Staging environment
+TEST_ENV=prod npm test     # Production environment
+```
+
+## 📊 Reports & Results
+
+After running tests, view results in:
+
+- **HTML Report**: `playwright-report/index.html`
+- **JSON Results**: `test-results/results.json`  
+- **JUnit XML**: `test-results/results.xml`
+- **Screenshots**: Auto-captured on failure
+- **Videos**: Recorded on failure
+
+## 🏗️ Project Structure
 
 ```
 assignment_99Tech_playwright/
@@ -36,140 +152,36 @@ assignment_99Tech_playwright/
 └── playwright.config.ts         # Playwright configuration
 ```
 
-## Framework Rationale
+## 🛠️ Configuration
 
-- **Page Object Model**: Inheritance-based structure with BasePage for maintainable, reusable code
-- **TypeScript**: Type safety and enhanced developer experience
-- **Multi-Browser Support**: Chrome, Firefox, Safari, Edge, Mobile Chrome/Safari
-- **Environment Configuration**: Dynamic baseURL, timeouts, retries per environment
+The framework supports:
+
+- **Multi-Environment**: Dynamic baseURL, timeouts, retries per environment
+- **Cross-Browser**: Standardized viewport settings across all browsers  
 - **Fixture System**: Modular fixtures for page injection and authentication
-- **Comprehensive Testing**: UI, API, and load testing in a single framework
-
-## Test Coverage
-
-### UI Tests (40 test cases)
-- **Login Module (11 tests)**: Valid login, case sensitivity, forgot password, session persistence, empty/invalid credentials, security (SQL injection, XSS), boundary testing
-- **Search Modules (29 tests)**:
-  - **PIM Search (12 tests)**: Employee search, filters, pagination, validation
-  - **Global Search (7 tests)**: Sidebar navigation search functionality
-  - **Admin Search (5 tests)**: System user search and management
-  - **Directory Search (5 tests)**: Employee directory search with location/job filters
-
-### API Tests (20 test cases)
-- **Authentication API (10 tests)**: CSRF protection, security validation, performance testing
-- **PIM Employee Search API (10 tests)**: Search functionality, pagination, parameter validation, security testing
-
-### Load Tests (9 test cases)
-- **Authentication Load (4 tests)**: Concurrent authentication, rapid requests, mixed scenarios, CSRF token generation
-- **Search Load (5 tests)**: Concurrent searches, parameter variations, pagination performance, authentication overhead
-
-## Steps to Execute Demo Scripts
-
-### Prerequisites
-```bash
-node -v  # Requires Node.js 16+
-npm -v   # Requires npm 8+
-```
-
-### Installation
-```bash
-# Clone the repository
-git clone git@github.com:hnhtrang/s5tech-qa.git
-cd s5tech-qa
-
-# Install dependencies
-npm install
-
-# Install browsers
-npx playwright install
-```
-
-### Essential Commands
-
-```bash
-# Run all tests
-npm test
-
-# Run tests in headed mode (see browser)
-npm run test:headed
-
-# Run login tests only
-npm run test:login
-
-# Run specific test case (example: L001)
-npm run test:case "L001"
-
-# Run tests in debug mode
-npm run test:debug
-
-# Show test report
-npm run show-report
-```
-
-### Alternative Direct Commands
-```bash
-# Run all tests
-npx playwright test
-
-# Run specific test file
-npx playwright test tests/login.spec.ts
-
-# Run API tests
-npx playwright test tests/api/
-
-# Run load tests
-npx playwright test tests/load-testing/
-
-# Run single test case with browser visible
-npx playwright test tests/login.spec.ts -g "L001" --project=chromium --headed
-
-# Run tests in debug mode
-npx playwright test --debug
-```
-
-### Environment Configuration
-```bash
-# Test against different environments
-TEST_ENV=dev npm test      # Default
-TEST_ENV=staging npm test  # Staging environment
-TEST_ENV=prod npm test     # Production environment
-```
-
-### Reports & Results
-- **HTML Report**: `playwright-report/index.html`
-- **JSON Results**: `test-results/results.json`
-- **JUnit XML**: `test-results/results.xml`
-- **Screenshots**: Captured on failure
-- **Videos**: Recorded on failure
-
-## Quick Demo
-
-Run the main demo covering login and search functionality:
-```bash
-# Login functionality demo
-npm run test:login
-
-# Search functionality demo  
-npx playwright test tests/pim-search.spec.ts --headed
-
-# API testing demo
-npx playwright test tests/api/ --reporter=list
-
-# Load testing demo
-npx playwright test tests/load-testing/ --reporter=list
-```
-
-### Youtube demo
-
-Here is the demo video: [Youtube](https://youtu.be/0hCFtn0vy_g)
-
-## CI/CD Integration
-
-The framework supports major CI/CD platforms with parallel execution and comprehensive reporting. Test results include screenshots, videos, and detailed HTML reports for debugging failed tests.
-
-## Test Data & Configuration
-
-- **Credentials**: Configurable via environment variables
-- **Test Data**: Centralized in `src/data/test-data.ts`
-- **Cross-browser**: Standardized viewport settings across all browsers
 - **Retry Logic**: Configurable retry mechanisms for flaky tests
+- **Test Data**: Centralized in `src/data/test-data.ts`
+
+## 🚀 CI/CD Integration
+
+The framework supports major CI/CD platforms with:
+- Parallel execution
+- Comprehensive reporting
+- Screenshots and videos on failure
+- Detailed HTML reports for debugging
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📞 Support
+
+For questions or support, please open an issue in the repository.
