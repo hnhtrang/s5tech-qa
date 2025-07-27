@@ -24,39 +24,63 @@ export class AdminPage extends BasePage {
     this.noRecordsMessage = page.getByText('No Records Found');
   }
 
+  async isSearchFormCollapsed(): Promise<boolean> {
+    return !(await this.isVisible(this.usernameInput));
+  }
+
+  async expandSearchForm(): Promise<void> {
+    const expandButton = this.page.locator('.oxd-icon-button:has(.bi-caret-down-fill)').first();
+    await this.click(expandButton);
+    await this.waitForElement(this.usernameInput);
+  }
+
+  async ensureSearchFormVisible(): Promise<void> {
+    if (await this.isSearchFormCollapsed()) {
+      await this.expandSearchForm();
+    }
+  }
+
   async searchByUsername(username: string): Promise<void> {
+    await this.ensureSearchFormVisible();
     await this.fill(this.usernameInput, username);
     await this.click(this.searchButton);
   }
 
   async fillUsername(username: string): Promise<void> {
+    await this.ensureSearchFormVisible();
     await this.fill(this.usernameInput, username);
   }
 
   async selectUserRole(role: string): Promise<void> {
+    await this.ensureSearchFormVisible();
     await this.click(this.userRoleDropdown);
     await this.page.getByRole('option', { name: role }).click();
   }
 
   async searchByEmployeeName(name: string): Promise<void> {
+    await this.ensureSearchFormVisible();
     await this.fill(this.employeeNameInput, name);
     await this.click(this.searchButton);
   }
 
   async fillEmployeeName(name: string): Promise<void> {
+    await this.ensureSearchFormVisible();
     await this.fill(this.employeeNameInput, name);
   }
 
   async selectStatus(status: string): Promise<void> {
+    await this.ensureSearchFormVisible();
     await this.click(this.statusDropdown);
     await this.page.getByRole('option', { name: status }).click();
   }
 
   async performSearch(): Promise<void> {
+    await this.ensureSearchFormVisible();
     await this.click(this.searchButton);
   }
 
   async resetSearch(): Promise<void> {
+    await this.ensureSearchFormVisible();
     await this.click(this.resetButton);
   }
 
