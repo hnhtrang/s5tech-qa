@@ -14,9 +14,9 @@ export class AdminPage extends BasePage {
 
   constructor(page: Page) {
     super(page, TEST_DATA.urlPaths.admin);
-    this.usernameInput = page.getByPlaceholder('Type for hints...').first();
+    this.usernameInput = page.locator('.oxd-form-row').filter({ hasText: 'Username' }).locator('input').first();
     this.userRoleDropdown = page.locator('.oxd-select-text').first();
-    this.employeeNameInput = page.getByPlaceholder('Type for hints...').nth(1);
+    this.employeeNameInput = page.getByPlaceholder('Type for hints...');
     this.statusDropdown = page.locator('.oxd-select-text').nth(1);
     this.searchButton = page.getByRole('button', { name: 'Search' });
     this.resetButton = page.getByRole('button', { name: 'Reset' });
@@ -29,9 +29,13 @@ export class AdminPage extends BasePage {
     await this.click(this.searchButton);
   }
 
+  async fillUsername(username: string): Promise<void> {
+    await this.fill(this.usernameInput, username);
+  }
+
   async selectUserRole(role: string): Promise<void> {
     await this.click(this.userRoleDropdown);
-    await this.page.getByText(role).click();
+    await this.page.getByRole('option', { name: role }).click();
   }
 
   async searchByEmployeeName(name: string): Promise<void> {
@@ -39,9 +43,17 @@ export class AdminPage extends BasePage {
     await this.click(this.searchButton);
   }
 
+  async fillEmployeeName(name: string): Promise<void> {
+    await this.fill(this.employeeNameInput, name);
+  }
+
   async selectStatus(status: string): Promise<void> {
     await this.click(this.statusDropdown);
-    await this.page.getByText(status).click();
+    await this.page.getByRole('option', { name: status }).click();
+  }
+
+  async performSearch(): Promise<void> {
+    await this.click(this.searchButton);
   }
 
   async resetSearch(): Promise<void> {
@@ -49,7 +61,7 @@ export class AdminPage extends BasePage {
   }
 
   async getSearchResults(): Promise<number> {
-    const rows = await this.resultsTable.locator('.oxd-table-row').count();
+    const rows = await this.resultsTable.locator('.oxd-table-card').count();
     return rows;
   }
 
