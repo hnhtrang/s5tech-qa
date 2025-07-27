@@ -40,7 +40,7 @@ export const TEST_DATA = {
   },
 
   pimData: {
-    validEmployeeNames: ['john', 'Timothy Lewis Amiano', 'Thomas Kutty Benny', 'Balancha Balanchayev Admin'],
+    validEmployeeNames: ['john', 'Timothy Lewis Amiano', 'Thomas Kutty Benny', 'Balancha Balanchayev Admin', 'Sara Tencrady'],
     invalidEmployeeNames: ['NonExistentEmployee', 'InvalidUser123'],
     validEmployeeIds: ['0001', '0039', '03694567', 'balancha'],
     invalidEmployeeIds: ['9999', 'INVALID'],
