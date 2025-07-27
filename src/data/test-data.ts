@@ -39,6 +39,19 @@ export const TEST_DATA = {
     includeOptions: ['Current Employees Only', 'Past Employees Only']
   },
 
+  pimData: {
+    validEmployeeNames: ['John', 'Sara', 'Peter', 'Linda'],
+    invalidEmployeeNames: ['NonExistentEmployee', 'InvalidUser123'],
+    validEmployeeIds: ['0295', '0303', '0320'],
+    invalidEmployeeIds: ['9999', 'INVALID'],
+    employmentStatuses: ['Full-Time Permanent', 'Part-Time Contract', 'Full-Time Contract'],
+    jobTitles: ['HR Manager', 'Software Engineer', 'QA Engineer'],
+    subUnits: ['Human Resources', 'Engineering', 'Administration'],
+    includeOptions: ['Current Employees Only', 'Current and Past Employees', 'Past Employees Only'],
+    longEmployeeName: 'a'.repeat(500),
+    specialCharEmployeeName: '@#$%^&*()'
+  },
+
   urlPaths: {
     login: '/web/index.php/auth/login',
     dashboard: '/web/index.php/dashboard/index',

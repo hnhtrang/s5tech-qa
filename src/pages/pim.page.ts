@@ -19,7 +19,7 @@ export class PIMPage extends BasePage {
   constructor(page: Page) {
     super(page, TEST_DATA.urlPaths.pim);
     this.employeeNameInput = page.getByPlaceholder('Type for hints...').first();
-    this.employeeIdInput = page.locator('input[placeholder="Type for hints..."]').nth(1);
+    this.employeeIdInput = page.locator('.oxd-input').nth(1);
     this.employmentStatusDropdown = page.locator('.oxd-select-text').first();
     this.includeDropdown = page.locator('.oxd-select-text').nth(1);
     this.supervisorNameInput = page.getByPlaceholder('Type for hints...').nth(2);
@@ -28,7 +28,7 @@ export class PIMPage extends BasePage {
     this.searchButton = page.getByRole('button', { name: 'Search' });
     this.resetButton = page.getByRole('button', { name: 'Reset' });
     this.resultsTable = page.locator('.oxd-table-body');
-    this.noRecordsMessage = page.getByText('No Records Found');
+    this.noRecordsMessage = page.locator('.oxd-table-body .oxd-text--span').filter({ hasText: 'No Records Found' });
     this.recordsCount = page.locator('.oxd-text--span');
   }
 
@@ -44,12 +44,12 @@ export class PIMPage extends BasePage {
 
   async selectEmploymentStatus(status: string): Promise<void> {
     await this.click(this.employmentStatusDropdown);
-    await this.page.getByText(status).click();
+    await this.page.getByRole('option', { name: status }).click();
   }
 
   async selectInclude(option: string): Promise<void> {
     await this.click(this.includeDropdown);
-    await this.page.getByText(option).click();
+    await this.page.getByRole('option', { name: option }).click();
   }
 
   async searchBySupervisor(name: string): Promise<void> {
@@ -59,12 +59,12 @@ export class PIMPage extends BasePage {
 
   async selectJobTitle(title: string): Promise<void> {
     await this.click(this.jobTitleDropdown);
-    await this.page.getByText(title).click();
+    await this.page.getByRole('option', { name: title }).click();
   }
 
   async selectSubUnit(unit: string): Promise<void> {
     await this.click(this.subUnitDropdown);
-    await this.page.getByText(unit).click();
+    await this.page.getByRole('option', { name: unit }).click();
   }
 
   async resetSearch(): Promise<void> {
@@ -82,5 +82,82 @@ export class PIMPage extends BasePage {
 
   async getRecordsCount(): Promise<string> {
     return await this.getText(this.recordsCount);
+  }
+
+  async verifySearchResultsContainName(searchName: string): Promise<boolean> {
+    const rows = await this.resultsTable.locator('.oxd-table-row').all();
+    if (rows.length === 0) return false;
+    
+    for (const row of rows) {
+      // Based on debug output: firstName is in cell 2, lastName is in cell 3  
+      const firstNameCell = await row.locator('.oxd-table-cell').nth(2).textContent();
+      const lastNameCell = await row.locator('.oxd-table-cell').nth(3).textContent();
+      const fullName = `${firstNameCell} ${lastNameCell}`.toLowerCase();
+      
+      if (fullName.includes(searchName.toLowerCase())) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  async verifySearchResultsContainId(searchId: string): Promise<boolean> {
+    const rows = await this.resultsTable.locator('.oxd-table-row').all();
+    if (rows.length === 0) return false;
+    
+    for (const row of rows) {
+      // ID is actually in the second cell (index 1), not the first
+      const idCell = await row.locator('.oxd-table-cell').nth(1).textContent();
+      const cleanId = idCell?.replace(/["\s]/g, '') || '';
+      const cleanSearchId = searchId.replace(/["\s]/g, '');
+      if (cleanId.includes(cleanSearchId)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  async verifyFilterResults(filterType: 'employment' | 'jobTitle' | 'subUnit', expectedValue: string): Promise<boolean> {
+    const rows = await this.resultsTable.locator('.oxd-table-row').all();
+    if (rows.length === 0) return false;
+    
+    // Based on debug output: jobTitle=index 4, employment=index 5, subUnit=index 6
+    const columnIndex = filterType === 'employment' ? 5 : filterType === 'jobTitle' ? 4 : 6;
+    let hasValidData = false;
+    
+    for (const row of rows) {
+      const cellValue = await row.locator('.oxd-table-cell').nth(columnIndex).textContent();
+      const cleanCellValue = cellValue?.trim() || '';
+      
+      if (cleanCellValue !== '') {
+        hasValidData = true;
+        if (!cleanCellValue.includes(expectedValue)) {
+          return false;
+        }
+      }
+    }
+    
+    // If no rows have data in this column, consider it valid (empty state)
+    return hasValidData;
+  }
+
+  async getAllResultData(): Promise<Array<{id: string, firstName: string, lastName: string, jobTitle: string, employmentStatus: string, subUnit: string}>> {
+    const rows = await this.resultsTable.locator('.oxd-table-row').all();
+    const results: Array<{id: string, firstName: string, lastName: string, jobTitle: string, employmentStatus: string, subUnit: string}> = [];
+    
+    for (const row of rows) {
+      const cells = await row.locator('.oxd-table-cell').all();
+      if (cells.length >= 7) {
+        results.push({
+          id: (await cells[1].textContent()) || '',         // ID is in column 1
+          firstName: (await cells[2].textContent()) || '',   // First name in column 2
+          lastName: (await cells[3].textContent()) || '',    // Last name in column 3
+          jobTitle: (await cells[4].textContent()) || '',    // Job title in column 4
+          employmentStatus: (await cells[5].textContent()) || '', // Employment status in column 5
+          subUnit: (await cells[6].textContent()) || ''      // Sub unit in column 6
+        });
+      }
+    }
+    return results;
   }
 }

@@ -36,8 +36,10 @@
     "test:headed": "npx playwright test --headed",
     "test:chromium": "npx playwright test --project=chromium",
     "test:debug": "npx playwright test --debug",
-    "test:case": "npx playwright test tests/login.spec.ts -g",
     "test:login": "npx playwright test tests/login.spec.ts --project=chromium",
+    "test:global": "npx playwright test tests/global-search.spec.ts --project=chromium",
+    "test:admin": "npx playwright test tests/admin-search.spec.ts --project=chromium",
+    "test:pim": "npx playwright test tests/pim-search.spec.ts --project=chromium",
     "show-report": "npx playwright show-report",
     "show-report:port": "npx playwright show-report --port 9324",
     "test:ui": "npx playwright test --ui"
