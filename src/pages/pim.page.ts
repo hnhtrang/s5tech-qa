@@ -198,10 +198,14 @@ export class PIMPage extends BasePage {
     if (rows.length === 0) return false;
     
     // Based on debug output: jobTitle=index 4, employment=index 5, subUnit=index 6
-    const columnIndex = filterType === 'employment' ? 5 : filterType === 'jobTitle' ? 4 : 6;
+    let columnIndex = filterType === 'employment' ? 5 : filterType === 'jobTitle' ? 4 : 6;
     let hasValidData = false;
     
     for (const row of rows) {
+      const numberOfColumns = await row.locator('.oxd-table-cell').count();
+      if (numberOfColumns === 6 && columnIndex === 6) {
+        columnIndex = 5;
+      }
       const cellValue = await row.locator('.oxd-table-cell').nth(columnIndex).textContent();
       const cleanCellValue = cellValue?.trim() || '';
       
