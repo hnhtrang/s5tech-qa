@@ -76,7 +76,7 @@ test.describe('PIM Search Module', () => {
 
     test('P006: Combined filters search', async ({ pimPage }) => {
       const searchName = TEST_DATA.pimData.validEmployeeNames[1]; // 'Timothy Lewis Amiano'
-      const employmentStatus = TEST_DATA.pimData.employmentStatuses[0]; // 'Full-Time Permanent'
+      const employmentStatus = TEST_DATA.pimData.employmentStatuses[3]; // 'Part-Time Internship'
       
       // Use the new autocomplete search method
       await pimPage.searchByEmployeeName(searchName);
@@ -99,7 +99,7 @@ test.describe('PIM Search Module', () => {
 
     test('P007: Reset filters functionality', async ({ pimPage }) => {
       await pimPage.searchByEmployeeName(TEST_DATA.pimData.validEmployeeNames[0]);
-      await pimPage.selectEmploymentStatus(TEST_DATA.pimData.employmentStatuses[0]);
+      await pimPage.selectEmploymentStatus(TEST_DATA.pimData.employmentStatuses[3]);
       
       await pimPage.resetSearch();
       
