@@ -177,10 +177,13 @@ export class PIMPage extends BasePage {
   async verifySearchResultsContainId(searchId: string): Promise<boolean> {
     const rows = await this.resultsTable.locator('.oxd-table-card').all();
     if (rows.length === 0) return false;
-    
+
     for (const row of rows) {
       // ID is actually in the second cell (index 1), not the first
-      const idCell = await row.locator('.oxd-table-cell').nth(1).textContent();
+      let idCell = await row.locator('.oxd-table-cell').nth(1).textContent();
+      if (idCell === '') {
+        idCell = await row.locator('.oxd-table-cell').first().textContent();
+      }
       const cleanId = idCell?.replace(/["\s]/g, '') || '';
       const cleanSearchId = searchId.replace(/["\s]/g, '');
       if (cleanId.includes(cleanSearchId)) {

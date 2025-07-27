@@ -16,7 +16,7 @@ test.describe('PIM Search Module', () => {
       
       // PIM search with autocomplete still shows all employees but verifies the name exists
       expect(resultCount).toBeGreaterThan(0);
-      
+
       const containsSearchedName = await pimPage.verifySearchResultsContainName(searchName);
       expect(containsSearchedName).toBeTruthy();
     });
@@ -125,6 +125,7 @@ test.describe('PIM Search Module', () => {
     });
 
     test('P013: Search with empty criteria', async ({ pimPage }) => {
+      await pimPage.ensureSearchFormVisible();
       await pimPage.click(pimPage.searchButton);
       await pimPage.page.waitForTimeout(1000);
       const resultCount = await pimPage.getSearchResults();

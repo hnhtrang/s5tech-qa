@@ -21,7 +21,7 @@ export const TEST_DATA = {
   },
 
   searchData: {
-    validEmployeeNames: ['john bhim', 'Timothy Lewis Amiano', 'Balancha Balanchayev Admin'],
+    validEmployeeNames: ['john', 'Timothy Lewis Amiano', 'Balancha Balanchayev Admin'],
     invalidEmployeeNames: ['NonExistentUser', ''],
     validEmployeeIds: ['45', '0039', 'balancha'],
     invalidEmployeeIds: ['999999', 'abc'],
@@ -40,9 +40,9 @@ export const TEST_DATA = {
   },
 
   pimData: {
-    validEmployeeNames: ['john bhim', 'Timothy Lewis Amiano', 'Thomas Kutty Benny', 'Balancha Balanchayev Admin'],
+    validEmployeeNames: ['john', 'Timothy Lewis Amiano', 'Thomas Kutty Benny', 'Balancha Balanchayev Admin'],
     invalidEmployeeNames: ['NonExistentEmployee', 'InvalidUser123'],
-    validEmployeeIds: ['45', '0039', '03694567', 'balancha'],
+    validEmployeeIds: ['0001', '0039', '03694567', 'balancha'],
     invalidEmployeeIds: ['9999', 'INVALID'],
     employmentStatuses: ['Full-Time Permanent', 'Part-Time Contract', 'Full-Time Contract'],
     jobTitles: ['HR Manager', 'Software Engineer', 'QA Engineer'],
